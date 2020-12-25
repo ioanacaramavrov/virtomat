@@ -21,8 +21,6 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 
 @NgModule({
   declarations: [
-    CustomInputsComponent,
-    SelectComponent,
     TypeaheadComponent,
     DatepickerComponent,
     TimepickerComponent,
@@ -44,8 +42,6 @@ import { RatingModule } from 'ngx-bootstrap/rating';
   ],
   providers: [],
   exports: [
-    CustomInputsComponent,
-    SelectComponent,
     TypeaheadComponent,
     DatepickerComponent,
     TimepickerComponent,

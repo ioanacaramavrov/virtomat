@@ -1,4 +1,4 @@
-import { Component,Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SidebarService, ISidebar } from 'src/app/containers/layout/sidebar/sidebar.service';
 import { Router } from '@angular/router';
@@ -15,16 +15,12 @@ export class AppComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   @Input() control = true;
   chartDataConfig: ChartService;
-
   conversionChartData = conversionChartData;
-
   constructor(private chartService: ChartService, private router: Router, private sidebarService: SidebarService) {
     this.chartDataConfig = this.chartService;
 
   }
-  btnClick= function () {
-    this.router.navigate(['user/login']);
-      }
+
   ngOnInit(): void {
     this.subscription = this.sidebarService.getSidebar().subscribe(
       res => {

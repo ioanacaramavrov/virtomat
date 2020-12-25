@@ -1,37 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectDataService, Person } from './select.data.service';
-import { catchError, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
-import { concat, Observable, of, Subject } from 'rxjs';
+import {Router} from '@angular/router';
+import {concat, Observable, of, Subject} from 'rxjs';
+import {catchError, distinctUntilChanged, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html'
 })
 
-export class SelectComponent implements OnInit {
+export class SelectComponent implements  OnInit {
   people: Person[];
-  selectedPersonId = '5a15b13c36e7a7f00cf0d7cb';
-  selectedPeople = [{ name: 'Karyn Wright' }];
-
-  selectedCompanies;
-  companies: any[] = [];
-  companiesNames = ['Uber', 'Microsoft', 'Flexigen'];
-
-  peopleAsync: Observable<Person[]>;
-  selectedPersonIdAsync = '5a15b13c605403381eec5019';
-
-  githubUsers$: Observable<any[]>;
-  selectedUsers = [];
+  numbers: number[];
+  selectedPeople = [{name: 'black'}];
+  selectedNumber = 1000;
 
   peopleLoading = false;
 
   peopleAsyncSearch: Observable<Person[]>;
   peopleLoadingAsyncSearch = false;
   peopleInputAsyncSearch = new Subject<string>();
-  selectedPersonsAsyncSearch = [{ name: 'Karyn Wright' }, { name: 'Other' }];
 
-  constructor(private selectDataService: SelectDataService) {
+  constructor(private selectDataService: SelectDataService, private router: Router) {
     this.people = selectDataService.people;
+    this.numbers = selectDataService.numbers;
+    this.router = router;
   }
 
   trackByFn(item: Person): string {
@@ -39,13 +32,6 @@ export class SelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.companiesNames.forEach((c, i) => {
-      this.companies.push({ id: i, name: c });
-    });
-
-    this.peopleAsync = this.selectDataService.getPeople();
-    this.githubUsers$ = this.selectDataService.getGithubAccounts('anjm');
-
     this.peopleLoading = true;
     this.selectDataService.getPeople().subscribe(x => {
       this.people = x;
@@ -65,7 +51,9 @@ export class SelectComponent implements OnInit {
     );
   }
 
-  addTagFn(addedName): { name: any; tag: true } {
-    return { name: addedName, tag: true };
-  }
+  // tslint:disable-next-line:typedef
+  btnClick = function() {
+    this.router.navigate(['user/login']);
+  };
+
 }
