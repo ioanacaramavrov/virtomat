@@ -1,0 +1,60 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)= "onSignUp(registerForm)" #registerForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+        #firstName="ngModel"
+        matInput
+        type="text"
+        ngModel
+        name="firstName"
+        placeholder="Numele" required>
+      <mat-error *ngIf="firstName.invalid">Introduceți vă rog numele</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        #lastName="ngModel"
+        matInput
+        type="text"
+        ngModel
+        name="lastName"
+        placeholder="Prenumele" required >
+      <mat-error *ngIf="lastName.invalid">Introduceți vă rog prenumele</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Data nasterii" type="date" required #birthday="ngModel" ngModel name="birthday">
+    <mat-error *ngIf="birthday.invalid">Introduceți vă rog data nașterii</mat-error>
+    </mat-form-field>
+    <label> Gen: </label>
+    <p>
+    <mat-radio-group aria-label="Select an option">
+      <label for="masculin" style="margin-right: 5px"> Masculin </label>
+      <input type="radio" id="masculin" name="masculin" [(ngModel)]="gender" value="masculin" style="margin-right: 30px">
+      <label for="feminin" style="margin-right: 5px"> Feminin </label>
+      <input type="radio" id="feminin" name="feminin" [(ngModel)]="gender" value="feminin">
+    </mat-radio-group>
+    </p>
+    <mat-form-field>
+      <input
+        #email="ngModel"
+        matInput
+        type="email"
+        ngModel
+        name="email"
+        placeholder="E-Mail" required email>
+      <mat-error *ngIf="email.invalid">Introduceți vă rog un email valid</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="password"
+        matInput
+        #password="ngModel"
+        name="password"
+        ngModel
+        placeholder="Parola" required/>
+      <mat-error *ngIf="password.invalid">Introduceți vă rog parola</mat-error>
+    </mat-form-field>
+    <button type="submit" mat-raised-button class="btn btn-outline-primary" *ngIf="!isLoading"> Înregistrează-te </button>
+  </form>
+</mat-card>
+
