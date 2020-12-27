@@ -6,20 +6,20 @@
         <div class="row">
              <div class="col-12 col-lg-6 mb-4">
                <label><span>Number of images generated</span></label>
-               <ng-select [items]="numbers" [(ngModel)]="selectedNumber">
+               <ng-select [items]="numbers" [(ngModel)]="selectedNumber" (change) = "handleSelectedNumber($event)">
                </ng-select>
              </div>
           <div class="col-12 col-lg-6 mb-4">
             <label><span>Price</span></label>
-            <input class="form-control"  name="price" value="2000" [disabled]="true"/>
+            <input class="form-control"  name="price" value="{{price}}  RON" [disabled]="true"/>
           </div>
              <div class="col-12 col-lg-6 mb-4">
                <div class="custom-control custom-radio">
-                 <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                 <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" (change)="handleUnique($event)">
                  <label class="custom-control-label" for="customRadio1">Unique</label>
                </div>
                <div class="custom-control custom-radio">
-                 <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                 <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" (change)="handleNonUnique($event)">
                  <label class="custom-control-label" for="customRadio2">Non unique</label>
                </div>
              </div>
@@ -27,7 +27,7 @@
           <div class="col-12 col-lg-6 mb-4">
             <label><span>Features</span></label>
             <ng-select [items]="people" [multiple]="true" bindLabel="name" [closeOnSelect]="false"
-                       [(ngModel)]="selectedPeople">
+                       [(ngModel)]="selectedPeople" (change)="handleFeatures($event)">
             </ng-select>
           </div>
         </div>
