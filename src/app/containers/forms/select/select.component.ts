@@ -51,47 +51,39 @@ export class SelectComponent implements  OnInit {
       )
     );
   }
-  // tslint:disable-next-line:typedef
-  updatePrice() {
+  updatePrice(): void {
     this.price = 2 * this.selectedNumber + this.selectedPeople.length * 10;
     if (this.isUnique) {
       this.price = this.price * 10;
     }
   }
 
-  // tslint:disable-next-line:typedef
-  handleUnique(evt: any) {
+  handleUnique(evt: any): void {
     const target = evt.target;
     if (target.checked) {
       this.isUnique = true;
     }
-    console.log(this.isUnique);
     this.updatePrice();
   }
 
-  // tslint:disable-next-line:typedef
-  handleNonUnique(evt: any) {
+  handleNonUnique(evt: any): void {
     const target = evt.target;
     if (target.checked) {
       this.isUnique = false;
     }
-    console.log(this.isUnique);
     this.updatePrice();
   }
 
-  // tslint:disable-next-line:typedef
-  btnClick = function() {
+  btnClick = function(): void {
     this.router.navigate(['user/login']);
   };
 
 
-  // tslint:disable-next-line:typedef
-  handleFeatures(evt: any) {
+  handleFeatures(evt: any): void {
     this.updatePrice();
   }
 
-  // tslint:disable-next-line:typedef
-  handleSelectedNumber(evt: any){
+  handleSelectedNumber(evt: any): void {
     this.updatePrice();
   }
 }

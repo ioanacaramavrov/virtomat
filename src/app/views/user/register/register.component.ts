@@ -24,7 +24,7 @@ export class RegisterComponent  {
     this.buttonState = 'show-spinner';
 
     this.authService.register(this.registerForm.value).then((user) => {
-      this.router.navigate([environment.adminRoot]);
+      this.router.navigate(['user/login']);
     }).catch((error) => {
       this.notifications.create('Error', error.message,
         NotificationType.Bare, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false });

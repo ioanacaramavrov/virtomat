@@ -9,15 +9,9 @@ router.post('/register', (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        fullName: req.body.displayName,
         email: req.body.email,
-        password: hash,
-        isEmployee: req.body.isEmployee,
-        isAdmin: req.body.isAdmin,
-        birthday: req.body.birthday,
-        idPharmacy: req.body.idPharmacy,
-        gender: req.body.gender
+        password: hash
       });
       user.save()
         .then(result => {
@@ -46,41 +40,11 @@ router.get('', (req, res, next) =>{
       res.status(500).json({error: err});
     });
 });
-router.get('/isEmployee/:userId', (req, res, next) =>{
-  const id = req.params.userId;
-  User.findById(id)
-    .then(user => {
-        res.status(200).json({
-          isEmployee: user.isEmployee,
-          isAdmin: user.isAdmin
-        })
-    })
-    .catch(err =>{
-      res.status(200).json({
-        error:err
-      })
-    });
 
-});
-router.get('/idPharmacy/:userId', (req, res, next) => {
-  const id = req.params.userId;
-  User.findById(id)
-    .then(user => {
-      res.status(200).json({
-        idPharmacy: user.idPharmacy
-      })
-    })
-    .catch(err =>{
-      res.status(200).json({
-        error:err
-      })
-    });
-
-});
 router.get('/:userId', (req, res, next) =>{
   const id = req.params.userId;
   User.findById(id)
-    .select('_id firstName lastName email')
+    .select('_id fullName email')
     .then(user => {
       res.status(200).json({
           user: user
@@ -102,10 +66,7 @@ router.post('/login', (req,res,next) => {
           });
         }
         auth_user = user;
-        if(req.body.isEmployee || user.isEmployee)
-         return bcrypt.compare(req.body.password, user.password) && user.isEmployee && req.body.isEmployee;
-        else
-          return bcrypt.compare(req.body.password, user.password)
+        return bcrypt.compare(req.body.password, user.password)
     })
     .then(result => {
       if(!result) {
@@ -119,42 +80,13 @@ router.post('/login', (req,res,next) => {
           token: token,
           expiresIn: 3600,
           userId: auth_user._id,
-          isAdmin: auth_user.isAdmin,
-          isEmployee: auth_user.isEmployee
+          fullName: auth_user.fullName
        });
     })
     .catch(err => {
       return res.status(401).json({
         message: 'Auth failed!'
-      });})});
-
-router.get('/bi/clienti', (req, res, next) =>{
-  User.find()
-    .select('_id firstName lastName email birthday gender')
-    .where('isEmployee').equals('false')
-    .exec()
-    .then(docs => {
-      res.status(200).json({
-        clienti : docs
-      })
+      });
     })
-    .catch(err => {
-      res.status(500).json({error: err});
-    });
-});
-
-router.get('/bi/farmacisti', (req, res, next) =>{
-  User.find()
-    .select('_id firstName lastName email birthday idPharmacy gender')
-    .where('isEmployee').equals('true')
-    .exec()
-    .then(docs => {
-      res.status(200).json({
-        farmacisti : docs
-      })
-    })
-    .catch(err => {
-      res.status(500).json({error: err});
-    });
 });
 module.exports = router;
