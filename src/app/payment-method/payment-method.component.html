@@ -4,7 +4,6 @@
         <div class="panel panel-default">
           <form [formGroup]="customStripeForm" (ngSubmit)="pay(customStripeForm.value)">
             <div class="panel-body mt-5">
-              <h4>Stripe - Custom form demo</h4>    
               <p><b>{{ message }}</b></p>
               <div class="row">
                 <div class="col-xs-12 col-md-12">
@@ -96,7 +95,6 @@
             </div>
           </div>
         </form>
-        <p class="mt-2">Try it out using the test card number 4242 4242 4242 4242, a random three-digit CVC number and any expiration date in the future.</p>
       </div>
     </div>
   </div>
