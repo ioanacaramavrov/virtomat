@@ -1,0 +1,103 @@
+<div class="container">    
+    <div class="row">
+      <div class="col-xs-12 col-md-8 mr-auto ml-auto">            
+        <div class="panel panel-default">
+          <form [formGroup]="customStripeForm" (ngSubmit)="pay(customStripeForm.value)">
+            <div class="panel-body mt-5">
+              <h4>Stripe - Custom form demo</h4>    
+              <p><b>{{ message }}</b></p>
+              <div class="row">
+                <div class="col-xs-12 col-md-12">
+                  <div class="form-group">
+                    <label>CARD NUMBER</label>
+                    <div class="input-group">
+                      <input type="text" formControlName="cardNumber" class="form-control" placeholder="Valid Card Number" name="cardNumber" maxlength="18" />
+                      <span class="input-group-addon">
+                        <span class="fa fa-credit-card"></span>
+                      </span>
+                    </div>
+                    <div *ngIf="submitted &amp;&amp; customStripeForm.controls.cardNumber.errors" class="text-danger">
+                      <div *ngIf="customStripeForm.controls.cardNumber.errors.required">Card number is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-7 col-md-7">
+                  <div class="form-group">
+                    <label><span class="hidden-xs">EXPIRATION</span> Date</label>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <select formControlName="expMonth" class="form-control">
+                            <option value="">Select Month</option>
+                            <option value="1">01</option>
+                            <option value="2">02</option>
+                            <option value="3">03</option>
+                            <option value="4">04</option>
+                            <option value="5">05</option>
+                            <option value="6">06</option>
+                            <option value="7">07</option>
+                            <option value="8">08</option>
+                            <option value="9">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 pull-right">
+                      <div class="form-group">
+                        <select formControlName="expYear" class="form-control">
+                          <option value="">Select Year</option>
+                          <option value="20">2020</option>
+                          <option value="21">2021</option>
+                          <option value="22">2022</option>
+                          <option value="23">2023</option>
+                          <option value="24">2024</option>
+                          <option value="25">2025</option>
+                          <option value="26">2026</option>
+                          <option value="27">2027</option>
+                          <option value="28">2028</option>
+                          <option value="29">2029</option>
+                          <option value="30">2030</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+   
+                  <div *ngIf="submitted &amp;&amp; customStripeForm.controls.expMonth.errors" class="text-danger">
+                    <div *ngIf="customStripeForm.controls.expMonth.errors.required">Expiration month is required</div>
+                  </div>
+   
+                  <div *ngIf="submitted &amp;&amp; customStripeForm.controls.expYear.errors" class="text-danger">
+                    <div *ngIf="customStripeForm.controls.expYear.errors.required">Expiration year is required</div>
+                  </div>
+                </div>                            
+              </div>
+              <div class="col-xs-5 col-md-5 pull-right">
+                <div class="form-group">
+                  <label>CV CODE</label>
+                  <input type="text" formControlName="cvv" class="form-control" placeholder="CVC" maxlength="4" />
+                </div>
+                <div *ngIf="submitted &amp;&amp; customStripeForm.controls.cvv.errors" class="text-danger">
+                  <div *ngIf="customStripeForm.controls.cvv.errors.required">CVV is required</div>
+                  <div *ngIf="customStripeForm.controls.cvv.errors.minlength">CVV must be at least 3 characters</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <div class="row">
+              <div class="col-xs-12 col-md-12">
+                <button class="btn btn-warning btn-lg btn-block" *ngIf="!formProcess">Process payment</button>
+                <span class="btn btn-warning btn-lg btn-block" *ngIf="formProcess">Processing please wait...</span>
+              </div>
+            </div>
+          </div>
+        </form>
+        <p class="mt-2">Try it out using the test card number 4242 4242 4242 4242, a random three-digit CVC number and any expiration date in the future.</p>
+      </div>
+    </div>
+  </div>
+  </div>

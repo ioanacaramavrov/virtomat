@@ -59,7 +59,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ProductDetailOrdersComponent,
     ProductDetailCommentsComponent,
     ProductDetailInfoComponent,
-    ProductDetailTabsComponent
+    ProductDetailTabsComponent,
   ],
   imports: [
     CommonModule,

@@ -70,6 +70,10 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.langService.language = lang.code;
     this.currentLanguage = this.langService.languageShorthand;
   }
+  onPayment(){
+    this.router.navigate(['app/payment']);
+    console.log("FINISH");
+  }
 
   async ngOnInit(): Promise<void> {
     if (await this.authService.getUser()) {

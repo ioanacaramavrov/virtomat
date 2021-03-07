@@ -10,12 +10,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { LayoutContainersModule } from './containers/layout/layout.containers.module';
+import { PaymentMethodComponent } from './payment-method/payment-method.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
     ViewsModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     LayoutContainersModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(),
@@ -23,7 +27,8 @@ import { LayoutContainersModule } from './containers/layout/layout.containers.mo
     AngularFireModule.initializeApp(environment.firebase)
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    PaymentMethodComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
